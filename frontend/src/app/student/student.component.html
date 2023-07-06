@@ -1,51 +1,61 @@
+<h1>Student Data Management</h1>
 <div class="container">
     <div class="form-container">
-        <h2>Add / Edit Student</h2>
-        <form>
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" [(ngModel)]="newStudent.name">
-            </div>
-            <div class="form-group">
-                <label for="age">Age:</label>
-                <input type="number" id="age" name="age" [(ngModel)]="newStudent.age">
-            </div>
-            <div class="form-group">
-                <label for="grade">Grade:</label>
-                <input type="text" id="grade" name="grade" [(ngModel)]="newStudent.grade">
-            </div>
-            <div class="form-actions">
-                <button type="button" class="btn btn-primary"
-                    (click)="updateMode ? updateStudent(newStudent) : createStudent()">
-                    {{ updateMode ? 'Update' : 'Add' }} Student
-                </button>
-                <button type="button" class="btn btn-secondary" (click)="cancelEdit()"
-                    [disabled]="!updateMode">Cancel</button>
-            </div>
-        </form>
+        <div class="form-card">
+            <h2>{{ updateMode ? 'Edit' : 'Add' }} Student</h2>
+            <form>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" [(ngModel)]="newStudent.name">
+                </div>
+                <div class="form-group">
+                    <label for="age">Age&nbsp;&nbsp;&nbsp;</label>
+                    <input type="number" id="age" name="age" [(ngModel)]="newStudent.age">
+                </div>
+                <div class="form-group">
+                    <label for="grade">Grade</label>
+                    <input type="number" id="grade" name="grade" [(ngModel)]="newStudent.grade">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-primary"
+                        (click)="updateMode ? updateStudent(newStudent) : createStudent()"
+                        [disabled]="!newStudent.name || !newStudent.age || !newStudent.grade">
+                        {{ updateMode ? 'Update' : 'Add' }} Student
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-cancel" (click)="cancelEdit()"
+                        [disabled]="!newStudent.name && !newStudent.age && !newStudent.grade">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
     <div class="table-container">
-        <h2>Student Records</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Age</th>
-                    <th>Grade</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let student of students">
-                    <td>{{ student.name }}</td>
-                    <td>{{ student.age }}</td>
-                    <td>{{ student.grade }}</td>
-                    <td>
-                        <button class="btn btn-info" (click)="editStudent(student)">Edit</button>
-                        <button class="btn btn-danger" (click)="deleteStudent(student)">Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-card">
+            <h2>Student Records</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-left">Name</th>
+                        <th>Age</th>
+                        <th>Grade</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let student of students; let i = index"
+                        [ngClass]="{ 'table-row-even': i % 2 === 0, 'table-row-odd': i % 2 !== 0 }">
+                        <td class="text-left">{{ student.name }}</td>
+                        <td class="text-center">{{ student.age }}</td>
+                        <td class="text-center">{{ student.grade }}</td>
+                        <td class="text-center">
+                            <button class="btn btn-info" (click)="editStudent(student)">Edit</button>
+                            <span class="button-space"></span>
+                            <button class="btn btn-danger" (click)="deleteStudent(student)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
