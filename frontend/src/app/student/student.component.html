@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="form-container">
+        <h2>Add / Edit Student</h2>
+        <form>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" [(ngModel)]="newStudent.name">
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" [(ngModel)]="newStudent.age">
+            </div>
+            <div class="form-group">
+                <label for="grade">Grade:</label>
+                <input type="text" id="grade" name="grade" [(ngModel)]="newStudent.grade">
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-primary"
+                    (click)="updateMode ? updateStudent(newStudent) : createStudent()">
+                    {{ updateMode ? 'Update' : 'Add' }} Student
+                </button>
+                <button type="button" class="btn btn-secondary" (click)="cancelEdit()"
+                    [disabled]="!updateMode">Cancel</button>
+            </div>
+        </form>
+    </div>
+    <div class="table-container">
+        <h2>Student Records</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Grade</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let student of students">
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.age }}</td>
+                    <td>{{ student.grade }}</td>
+                    <td>
+                        <button class="btn btn-info" (click)="editStudent(student)">Edit</button>
+                        <button class="btn btn-danger" (click)="deleteStudent(student)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

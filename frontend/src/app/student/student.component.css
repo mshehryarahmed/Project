@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.form-container {
+    width: 40%;
+    padding: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.table-container {
+    width: 55%;
+}
+
+.table {
+    width: 100%;
+}
+
+.table th,
+.table td {
+    padding: 0.5rem;
+}
+
+.form-actions {
+    margin-top: 1rem;
+}
